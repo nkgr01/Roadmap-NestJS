@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roadmap NestJS en français — la chaîne complète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f5f0;
+    --card:#ffffff;
+    --line:#e9e3d6;
+    --line-soft:#f0ebe0;
+    --ink:#14171e;
+    --ink-2:#3a4256;
+    --muted:#7c7a72;
+    --primary:#2f6f5e;
+    --primary-soft:rgba(47,111,94,.09);
+    --warm:#c97b3f;
+    --warm-soft:rgba(201,123,63,.10);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink-2);
+    font-family:'Outfit',system-ui,'Segoe UI',sans-serif;
+    font-size:16.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 96px}
+  @media (min-width:768px){ .wrap{padding:0 40px 120px} }
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:72px 0 40px;position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--primary);background:var(--primary-soft);
+    padding:6px 12px;border-radius:999px;margin-bottom:22px;
+  }
+  h1{
+    font-family:'DM Serif Display',Georgia,serif;font-weight:400;
+    font-size:clamp(2.1rem,5.2vw,3.35rem);line-height:1.1;letter-spacing:-.01em;
+    color:var(--ink);margin:0 0 18px;max-width:19ch;
+  }
+  .lede{font-size:1.12rem;max-width:62ch;color:var(--ink-2);margin:0 0 28px}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:10px;padding-top:22px;border-top:1px solid var(--line);
+  }
+  .hero-meta span{
+    font-size:13.5px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  }
+  .hero-meta span svg{width:15px;height:15px;color:var(--primary)}
+
+  /* ---------- Sections ---------- */
+  section{margin-top:76px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-head h2{
+    font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:1.85rem;
+    color:var(--ink);margin:0;letter-spacing:-.005em;
+  }
+  .sec-head .num{
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--primary);
+    background:var(--primary-soft);padding:4px 9px;border-radius:6px;white-space:nowrap;
+  }
+  .sec-sub{color:var(--muted);font-size:.98rem;max-width:68ch;margin:0 0 30px}
+
+  /* ---------- Card ---------- */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:26px 28px;box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+
+  /* ---------- SVG figure ---------- */
+  figure{margin:0}
+  figcaption{color:var(--muted);font-size:.9rem;margin-top:14px;text-align:center}
+  .fig-box{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+  .fig-box svg{width:100%;height:auto;display:block}
+
+  /* ---------- KV ---------- */
+  .kv{display:grid;grid-template-columns:150px 1fr;row-gap:0;column-gap:18px;margin:0}
+  .kv dt{
+    color:var(--muted);font-size:.93rem;border-bottom:1px dashed var(--line);padding:12px 0;
+  }
+  .kv dd{
+    margin:0;border-bottom:1px dashed var(--line);padding:12px 0;color:var(--ink);font-size:.97rem;
+  }
+  .kv dt:last-of-type,.kv dd:last-of-type{border-bottom:none}
+  @media (max-width:560px){ .kv{grid-template-columns:1fr} .kv dt{padding-bottom:0;border-bottom:none} .kv dd{padding-top:4px} }
+
+  /* ---------- Timeline ---------- */
+  .timeline{list-style:none;padding:0;margin:0;position:relative}
+  .timeline::before{
+    content:"";position:absolute;left:13px;top:14px;bottom:14px;width:2px;
+    background:var(--primary);opacity:.28;
+  }
+  .timeline > li{position:relative;padding:0 0 26px 48px}
+  .timeline > li::before{
+    content:"";position:absolute;left:5px;top:20px;width:18px;height:18px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--primary);
+  }
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px 22px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .step:hover{transform:translateY(-2px);box-shadow:0 8px 24px -6px rgba(0,0,0,.09)}
+  .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+  .step-head h3{
+    font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:1.32rem;
+    color:var(--ink);margin:0;line-height:1.25;flex:1 1 260px;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.02em;
+    color:var(--primary);background:var(--primary-soft);border-radius:999px;padding:4px 11px;white-space:nowrap;
+  }
+  .step p{margin:0 0 14px}
+  .goals{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px}
+  .goals li{position:relative;padding-left:24px;font-size:.96rem}
+  .goals li::before{
+    content:"";position:absolute;left:4px;top:9px;width:7px;height:7px;border-radius:50%;
+    background:var(--primary);opacity:.45;
+  }
+  .res-label{
+    font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;margin:0 0 10px;
+  }
+  .res{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 16px}
+  .res a{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    padding:8px 13px;font-size:.9rem;color:var(--ink);
+    transition:all .18s ease;
+  }
+  .res a:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+  .res a svg{width:15px;height:15px;flex:none;color:var(--primary)}
+  .res a .tag{
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);background:var(--card);border:1px solid var(--line);
+    border-radius:5px;padding:2px 6px;
+  }
+  .jalon{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--primary-soft);border-radius:12px;padding:13px 16px;
+  }
+  .jalon svg{width:18px;height:18px;color:var(--primary);flex:none;margin-top:2px}
+  .jalon p{margin:0;font-size:.93rem;color:var(--ink)}
+  .jalon strong{color:var(--primary);font-weight:600}
+
+  /* ---------- Table ---------- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:.93rem}
+  thead th{
+    text-align:left;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+    padding:16px 20px;border-bottom:1px solid var(--line);font-weight:600;background:var(--bg);
+  }
+  tbody td{padding:15px 20px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-2)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody td:first-child{color:var(--ink);font-weight:500}
+  tbody a{color:var(--primary);text-decoration:none;border-bottom:1px solid rgba(47,111,94,.3)}
+  tbody a:hover{border-bottom-color:var(--primary)}
+  .badge{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.05em;
+    text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:nowrap;
+    background:var(--primary-soft);color:var(--primary);
+  }
+  .badge.warm{background:var(--warm-soft);color:var(--warm)}
+
+  /* ---------- Pitfalls ---------- */
+  .pit-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .pit{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+  .pit h4{
+    margin:0 0 8px;font-size:1rem;color:var(--ink);font-weight:600;
+    display:flex;align-items:center;gap:9px;
+  }
+  .pit h4 svg{width:17px;height:17px;color:var(--warm);flex:none}
+  .pit p{margin:0;font-size:.9rem;color:var(--muted)}
+
+  /* ---------- Project ---------- */
+  .proj{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .proj-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+  .proj-card .n{
+    font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--primary);
+    background:var(--primary-soft);padding:3px 9px;border-radius:5px;display:inline-block;margin-bottom:12px;
+  }
+  .proj-card h4{margin:0 0 8px;font-size:1rem;color:var(--ink);font-weight:600}
+  .proj-card p{margin:0;font-size:.9rem;color:var(--muted)}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.87rem;
+  }
+  footer a{color:var(--primary);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  footer ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+  .note{
+    background:var(--warm-soft);border-radius:12px;padding:15px 18px;display:flex;gap:12px;
+    align-items:flex-start;margin-top:22px;
+  }
+  .note svg{width:18px;height:18px;color:var(--warm);flex:none;margin-top:2px}
+  .note p{margin:0;font-size:.91rem;color:var(--ink-2)}
+  code{
+    font-family:'JetBrains Mono',monospace;font-size:.87em;
+    background:var(--line-soft);padding:2px 6px;border-radius:5px;color:var(--ink);
+  }
+  @media (max-width:560px){
+    body{font-size:15.5px}
+    .card,.step{padding:20px 18px}
+    .timeline > li{padding-left:38px}
+    .timeline::before{left:9px}
+    .timeline > li::before{left:1px;width:16px;height:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      Parcours NestJS · FR
+    </span>
+    <h1>La chaîne pour maîtriser NestJS, en français.</h1>
+    <p class="lede">
+      Sept étapes, de « Hello World » à une API sécurisée et testée. Chaque étape s'appuie sur une
+      ressource en français et se termine par un jalon concret — pas seulement une vidéo à regarder.
+      Tout est vérifié et à jour pour Nest&nbsp;v12.
+    </p>
+    <div class="hero-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ~50 h de contenu · 6 à 8 semaines</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 4 4M17 7l-1.5 1.5"/><circle cx="11.5" cy="11.5" r="8"/></svg> Docs FR + 2 playlists vidéo FR</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 7 jalons de code</span>
+    </div>
+  </header>
+
+  <!-- ================= MENTAL MODEL ================= -->
+  <section>
+    <div class="sec-head"><span class="num">01</span><h2>Le modèle mental à avoir en tête</h2></div>
+    <p class="sec-sub">
+      Tout le reste en découle. Nest n'est pas Express : une requête traverse une chaîne de
+      couches bien ordonnées. Si tu places chaque concept au bon endroit, tout le reste devient prévisible.
+    </p>
+    <figure>
+      <div class="fig-box">
+        <svg viewBox="0 0 690 470" role="img" aria-label="Cycle de vie d'une requête dans NestJS : middleware, guards, intercepteurs, pipes, contrôleur, service, réponse, avec les filtres d'exception.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#2f6f5e"/>
+            </marker>
+            <marker id="ahw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#c97b3f"/>
+            </marker>
+          </defs>
+
+          <!-- 1 requête -->
+          <rect x="20" y="6" width="300" height="44" rx="10" fill="#f7f5f0" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="33" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Requête HTTP</text>
+          <text x="302" y="33" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">client</text>
+
+          <!-- arrow -->
+          <line x1="170" y1="50" x2="170" y2="70" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 2 middleware -->
+          <rect x="20" y="72" width="300" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="99" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Middleware</text>
+          <text x="302" y="99" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">Express / Fastify</text>
+          <line x1="170" y1="116" x2="170" y2="136" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 3 guards -->
+          <rect x="20" y="138" width="300" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="165" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Guards</text>
+          <text x="302" y="165" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">autorise ou refuse</text>
+          <line x1="170" y1="182" x2="170" y2="202" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 4 interceptors -->
+          <rect x="20" y="204" width="300" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="231" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Intercepteurs</text>
+          <text x="302" y="231" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">avant le handler</text>
+          <line x1="170" y1="248" x2="170" y2="268" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 5 pipes -->
+          <rect x="20" y="270" width="300" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="297" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Pipes</text>
+          <text x="302" y="297" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">valide &amp; transforme</text>
+          <line x1="170" y1="314" x2="170" y2="334" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 6 controller + service -->
+          <rect x="20" y="336" width="142" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="363" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Controller</text>
+          <line x1="162" y1="358" x2="176" y2="358" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+          <rect x="180" y="336" width="140" height="44" rx="10" fill="#ffffff" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="198" y="363" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Service</text>
+          <line x1="250" y1="380" x2="250" y2="400" stroke="#2f6f5e" stroke-width="2" marker-end="url(#ah)"/>
+
+          <!-- 7 réponse -->
+          <rect x="20" y="402" width="300" height="44" rx="10" fill="#f7f5f0" stroke="#e9e3d6" stroke-width="1"/>
+          <text x="38" y="429" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#14171e">Réponse</text>
+          <text x="302" y="429" text-anchor="end" font-family="Outfit,sans-serif" font-size="12.5" fill="#7c7a72">intercepteur post</text>
+
+          <!-- exception filters -->
+          <rect x="376" y="138" width="294" height="308" rx="12" fill="#c97b3f" fill-opacity=".05" stroke="#c97b3f" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text x="523" y="196" text-anchor="middle" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#c97b3f">Filtres d'exception</text>
+          <text x="523" y="222" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" fill="#7c7a72">Intercepte l'erreur levée</text>
+          <text x="523" y="242" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" fill="#7c7a72">n'importe où dans la chaîne</text>
+          <text x="523" y="284" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12.5" fill="#3a4256">NotFoundException</text>
+          <text x="523" y="306" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12.5" fill="#3a4256">HttpException</text>
+          <text x="523" y="328" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12.5" fill="#3a4256">erreur 500 personalisée</text>
+          <path d="M320 358 L360 358" fill="none" stroke="#c97b3f" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ahw)"/>
+        </svg>
+      </div>
+      <figcaption>Le cycle de vie d'une requête NestJS — chaque concept de ce parcours se place à une de ces couches.</figcaption>
+    </figure>
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <p><strong>Le piège classique</strong> : beaucoup deCodes essaient de faire l'authentification dans un contrôleur ou un service. La couche <code>Guards</code> existe pour ça. Idem pour la validation (<code>Pipes</code>) et la gestion d'erreur (<code>Exception Filters</code>).</p>
+    </div>
+  </section>
+
+  <!-- ================= PRÉREQUIS ================= -->
+  <section>
+    <div class="sec-head"><span class="num">02</span><h2>Avant de démarrer</h2></div>
+    <p class="sec-sub">Coche ces prérequis : Nest suppose TypeScript et un minimum de confort HTTP.</p>
+    <div class="card">
+      <dl class="kv">
+        <dt>Node.js</dt>
+        <dd>Version 20.19+ minimum. <strong>Tu as Node v24.22.1 installé</strong> — tu peux démarrer tout de suite.</dd>
+        <dt>TypeScript</dt>
+        <dd>À l'aise avec les <code>interface</code>, les décorateurs (<code>@Injectable()</code>) et les types génériques. 3 h de mise à niveau suffisent.</dd>
+        <dt>HTTP / REST</dt>
+        <dd>Savoir ce qu'est un <code>GET</code>, un <code>POST</code>, un code 200 / 400 / 401 et un corps de requête JSON.</dd>
+        <dt>JavaScript</dt>
+        <dd>Promesses, <code>async/await</code>, modules ES. Tu n'as pas besoin de DOM ni de React.</dd>
+        <dt>Outil</dt>
+        <dd><code>npm</code> ou <code>pnpm</code>. Un client HTTP (Insomnia ou Postman) pour tester tes routes.</dd>
+        <dt>Base de données</dt>
+        <dd>À partir de l'étape 3 seulement : PostgreSQL via Docker, ou une instance locale.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= LA CHAÎNE ================= -->
+  <section>
+    <div class="sec-head"><span class="num">03</span><h2>La chaîne, étape par étape</h2></div>
+    <p class="sec-sub">
+      Chaque étape a une ressource vidéo francophone principale et un complément en français.
+      Ne saute pas d'étape : l'injection de dépendances et les DTO sont utilisés partout après.
+    </p>
+
+    <ol class="timeline">
+
+      <!-- ÉTAPE 1 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 1 — Les fondations : Module, Controller, Service</h3>
+            <span class="chip">~6 h</span>
+          </div>
+          <ul class="goals">
+            <li>Créer un projet avec la CLI Nest et comprendre la structure <code>src/</code>.</li>
+            <li>Comprendre l'<strong>injection de dépendances</strong> : le décorateur <code>@Injectable()</code> et le constructeur.</li>
+            <li>Écrire des routes <code>GET</code> / <code>POST</code>, gérer les query params, body et route params.</li>
+            <li>Découper son code en modules fonctionnels plutôt qu'un seul gros <code>AppModule</code>.</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://www.youtube.com/watch?v=BHBn1RYBbNg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              NestJS de A à Z — (1) Les bases <span class="tag">39 min</span>
+            </a>
+            <a href="https://nestjs.fr/first-steps/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Docs FR — Premiers pas
+            </a>
+            <a href="https://nestjs.fr/controllers/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Contrôleurs
+            </a>
+            <a href="https://nestjs.fr/providers/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Fournisseurs
+            </a>
+            <a href="https://nestjs.fr/modules/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Modules
+            </a>
+            <a href="https://www.youtube.com/watch?v=UepQp2OT4gg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Alternative : module + controller + service <span class="tag">13 min</span>
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 1 —</strong> une API <code>GET /tasks</code> et <code>POST /tasks</code> qui lit et écrit un tableau en mémoire, répartie en <code>tasks.module.ts</code> / <code>tasks.controller.ts</code> / <code>tasks.service.ts</code>.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 2 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 2 — DTO, Pipes de validation, Exceptions, Intercepteurs</h3>
+            <span class="chip">~6 h</span>
+          </div>
+          <ul class="goals">
+            <li>Créer des <strong>DTO</strong> et les valider avec <code>class-validator</code> + <code>ValidationPipe</code>.</li>
+            <li>Brancher le <code>ValidationPipe</code> globalement dans <code>main.ts</code> — une seule fois, pour toute l'app.</li>
+            <li>Lever des exceptions HTTP propres (<code>NotFoundException</code>) au lieu de renvoyer des messages en dur.</li>
+            <li>Écrire un interceptor (logging, temps de réponse, transformation de sortie).</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://www.youtube.com/watch?v=3fv_GSmRyCI" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              (2) Pipes, DTO, Exceptions et Guards <span class="tag">37 min</span>
+            </a>
+            <a href="https://nestjs.fr/techniques/validation" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Validation
+            </a>
+            <a href="https://nestjs.fr/pipes/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Pipelines
+            </a>
+            <a href="https://nestjs.fr/exception-filters/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Filtres d'exception
+            </a>
+            <a href="https://nestjs.fr/interceptors/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Intercepteurs
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 2 —</strong> <code>POST /tasks</code> avec un <code>CreateTaskDto</code> renvoie <code>400</code> avec la liste précise des champs invalides ; <code>GET /tasks/999</code> renvoie <code>404</code> ; un interceptor journalise la durée de chaque requête.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 3 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 3 — Base de données et configuration</h3>
+            <span class="chip">~8 h</span>
+          </div>
+          <ul class="goals">
+            <li>Brancher <strong>Prisma</strong> (recommandé) ou TypeORM sur une base PostgreSQL.</li>
+            <li>Modéliser les entités, écrire les migrations, générer les types TypeScript.</li>
+            <li>Isoler la configuration avec <code>ConfigModule</code> et un <code>.env</code> validé au démarrage.</li>
+            <li>Comprendre la différence entre <code>PrismaService</code> (provider) et un simple repository.</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://www.youtube.com/watch?v=q8YjlBYHDgE" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Connecter une base avec Prisma <span class="tag">13 min</span>
+            </a>
+            <a href="https://www.youtube.com/watch?v=9coTqz-WERE" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Premier CRUD étape par étape <span class="tag">25 min</span>
+            </a>
+            <a href="https://nestjs.fr/recipes/prisma" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Recette Prisma
+            </a>
+            <a href="https://nestjs.fr/techniques/configuration" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Configuration
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 3 —</strong> les tâches sont persistées en PostgreSQL. Le CRUD complet (create / read / update / delete + pagination) fonctionne, et l'app refuse de démarrer si une variable d'environnement manque.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 4 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 4 — Sécurité : JWT, Guards, rôles, durcissement HTTP</h3>
+            <span class="chip">~8 h</span>
+          </div>
+          <ul class="goals">
+            <li>Créer un module <code>auth</code> : <code>register</code> / <code>login</code>, hachage <code>bcrypt</code>, génération du JWT.</li>
+            <li>Protéger les routes avec un <strong>Guard</strong> global, puis gérer les rôles (<code>@Roles</code>) pour l'admin.</li>
+            <li>Ajouter <code>Helmet</code>, <code>CORS</code> restreint et le <strong>rate limiting</strong> (Throttler).</li>
+            <li>Ne jamais mal gérer le mot de passe : hash avec sel (<code>bcrypt</code>), jamais de SHA brut.</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://www.youtube.com/watch?v=39E9bMZX9rg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Authentification JWT sécurisée <span class="tag">32 min</span>
+            </a>
+            <a href="https://www.youtube.com/watch?v=mGDGCZsitto" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              (4) Sécurité : CORS, Helmet, CSRF, Rate limit <span class="tag">29 min</span>
+            </a>
+            <a href="https://www.youtube.com/watch?v=Esv7XKJhFzQ" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Les Guards en pratique <span class="tag">23 min</span>
+            </a>
+            <a href="https://nestjs.fr/security/authentication" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Authentification
+            </a>
+            <a href="https://nestjs.fr/security/rate-limiting" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Limitation du taux
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 4 —</strong> <code>POST /auth/login</code> renvoie un token ; les routes <code>/tasks</code> sont inaccessibles sans token ; une route <code>/admin</code> exige le rôle admin ; le rate limit bloque au bout de N requêtes.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 5 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 5 — Tests et documentation de l'API</h3>
+            <span class="chip">~5 h</span>
+          </div>
+          <ul class="goals">
+            <li>Écrire un <strong>test unitaire</strong> d'un service (Jest, déjà installé par la CLI).</li>
+            <li>Écrire un <strong>test e2e</strong> qui démarre l'application et tape une vraie route HTTP.</li>
+            <li>Générer la doc <strong>Swagger / OpenAPI</strong> pour documenter toute l'API automatiquement.</li>
+            <li>Apprendre à mocker une dépendance (pas de base de données réelle dans les tests unitaires).</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://nestjs.fr/fundamentals/testing" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Docs FR — Tests
+            </a>
+            <a href="https://nestjs.fr/openapi/introduction" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              OpenAPI / Swagger
+            </a>
+            <a href="https://nestjs.fr/recipes/swagger" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Recette Swagger
+            </a>
+            <a href="https://learn.nestjs.com/courses/591712" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg>
+              Cours officiel (EN, sous-titres) — chap. Tests
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 5 —</strong> <code>npm test</code> et <code>npm run test:e2e</code> passent au vert, et <code>/api/docs</code> affiche une documentation complète de ton API.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 6 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 6 — Industrialiser : structure, performance, déploiement</h3>
+            <span class="chip">~6 h</span>
+          </div>
+          <ul class="goals">
+            <li>Passer d'un projet unique à un <strong>monorepo</strong> (ou au moins séparer <code>app</code> et <code>modules</code>).</li>
+            <li>Découvrir <code>ConfigModule</code> avancé, le logging structuré, le cache et la planification de tâches.</li>
+            <li>Connaître les options de performance (Fastify, compression) et le health check (<code>Terminus</code>).</li>
+            <li>Avoir un <code>Dockerfile</code> et un <code>docker-compose.yml</code> qui lanquent l'app + la base.</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://nestjs.fr/cli/monorepo" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Espaces de travail (monorepo)
+            </a>
+            <a href="https://nestjs.fr/techniques/performance" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Performance (Fastify)
+            </a>
+            <a href="https://nestjs.fr/techniques/caching" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Mise en cache
+            </a>
+            <a href="https://nestjs.fr/recipes/terminus" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Vérifications de santé
+            </a>
+            <a href="https://nestjs.fr/faq/request-lifecycle" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Cycle de vie des requêtes
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 6 —</strong> <code>docker compose up</code> démarre l'app et PostgreSQL ; un endpoint <code>/health</code> répond ; l'image se construit avec <code>npm run build</code>.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- ÉTAPE 7 -->
+      <li>
+        <div class="step">
+          <div class="step-head">
+            <h3>Étape 7 — Spécialisation &amp; projet final</h3>
+            <span class="chip">~10 h</span>
+          </div>
+          <ul class="goals">
+            <li>Choisir une specialization selon ton métier : <strong>GraphQL</strong>, <strong>WebSockets</strong> ou <strong>microservices</strong>.</li>
+            <li>Comprendre <code>ExecutionContext</code>, <code>Reflector</code>, les portée d'injection et les modules dynamiques.</li>
+            <li>Construire un projet complet de bout en bout, avec tests et documentation.</li>
+            <li>Savoir expliquer tes choix d'architecture en entretien.</li>
+          </ul>
+          <p class="res-label">Ressources FR</p>
+          <div class="res">
+            <a href="https://nestjs.fr/graphql/quick-start" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              GraphQL — démarrage
+            </a>
+            <a href="https://nestjs.fr/websockets/gateways" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              WebSockets — Passerelles
+            </a>
+            <a href="https://nestjs.fr/microservices/basics" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Microservices — Aperçu
+            </a>
+            <a href="https://nestjs.fr/fundamentals/execution-context" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Contexte d'exécution
+            </a>
+            <a href="https://nestjs.fr/recipes/crud-generator" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Générateur CRUD
+            </a>
+          </div>
+          <div class="jalon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <p><strong>Jalon 7 —</strong> une API complète, sécurisée, testée et documentée, déployable. Tu es prêt pour un poste backend Node.js.</p>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- ================= PROJET FIL ROUGE ================= -->
+  <section>
+    <div class="sec-head"><span class="num">04</span><h2>Le projet fil rouge</h2></div>
+    <p class="sec-sub">
+      Un seul projet que tu fais grossir, étape par étape. C'est la méthode qui fait retenir
+      — pas une nouvelle app à chaque tuto.
+    </p>
+    <div class="proj">
+      <div class="proj-card">
+        <span class="n">Étapes 1 – 2</span>
+        <h4>API « Tasks » en mémoire</h4>
+        <p>CRUD en mémoire, DTO validés, erreurs typées. Tu testes chaque route avec Insomnia.</p>
+      </div>
+      <div class="proj-card">
+        <span class="n">Étape 3</span>
+        <h4>Bascule sur PostgreSQL</h4>
+        <p>Prisma + migrations. Le tableau en mémoire disparaît, l'API ne change pas.</p>
+      </div>
+      <div class="proj-card">
+        <span class="n">Étape 4</span>
+        <h4>Comptes utilisateurs</h4>
+        <p>Module <code>auth</code>, JWT, rôles <code>user</code> / <code>admin</code>, rate limiting.</p>
+      </div>
+      <div class="proj-card">
+        <span class="n">Étape 5</span>
+        <h4>Tests et Swagger</h4>
+        <p>Tests unitaires sur le service, e2e sur l'auth, doc OpenAPI générée.</p>
+      </div>
+      <div class="proj-card">
+        <span class="n">Étape 6</span>
+        <h4>Conteneurisation</h4>
+        <p>Dockerfile multi-stage, <code>compose</code> avec la base, endpoint de santé.</p>
+      </div>
+      <div class="proj-card">
+        <span class="n">Étape 7</span>
+        <h4>Notifications temps réel</h4>
+        <p>Une tâche créée déclenche un event WebSocket ou une file d'attente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPARATIF ================= -->
+  <section>
+    <div class="sec-head"><span class="num">05</span><h2>Quelle ressource pour quel niveau</h2></div>
+    <p class="sec-sub">Trois ressources françaises qui ne se recouvrent pas. Prends celle qui correspond à ton rythme.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ressource</th>
+            <th>Format</th>
+            <th>Langue</th>
+            <th>Idéal pour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://nestjs.fr/" target="_blank" rel="noopener">nestjs.fr</a></td>
+            <td><span class="badge">Documentation</span></td>
+            <td>Français intégral</td>
+            <td>La référence. Miroir complet de la doc officielle, traduite et maintenue. À garder ouvert en permanence.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.youtube.com/playlist?list=PLFlURPbtyOqgn2iC-iREQUXg25gX_XCOY" target="_blank" rel="noopener">La minute de code</a> — « NestJS de A à Z »</td>
+            <td><span class="badge">6 vidéos · 5 h</span></td>
+            <td>Français</td>
+            <td>Le parcours vidéo le plus complet et le plus récent (déc. 2025). Bases → pipes/DTO/guards → sécurité.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.youtube.com/playlist?list=PLNEpbO9HTVNQVPu4uUOqGVVKiHoIl4_xR" target="_blank" rel="noopener">Code with Sammy</a> — « Formation NestJS 2025 »</td>
+            <td><span class="badge">8 épisodes</span></td>
+            <td>Français</td>
+            <td>Le meilleur sur la partie <strong>pratique</strong> : Prisma, CRUD complet, JWT. Code source fourni sur GitHub par épisode.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.youtube.com/playlist?list=PLs_WqGRq69UiSaXX85NRUX4rkeiNP3K6l" target="_blank" rel="noopener">codeconcept</a> — « NestJS en français »</td>
+            <td><span class="badge">Vidéos courtes</span></td>
+            <td>Français</td>
+            <td>Datant de 2019 mais très clair sur le module / controller / service. Utile comme contre-exemple rapide.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.youtube.com/watch?v=Esv7XKJhFzQ" target="_blank" rel="noopener">console.log()</a> — « Nest JS en Français »</td>
+            <td><span class="badge">Playlist</span></td>
+            <td>Français</td>
+            <td>Bon sur les Guards et JWT, avec un ton très pédagogique.</td>
+          </tr>
+          <tr>
+            <td><a href="https://courses.nestjs.com/" target="_blank" rel="noopener">NestJS Courses</a> (officiel)</td>
+            <td><span class="badge warm">Anglais</span></td>
+            <td>Anglais + sous-titres</td>
+            <td>La seule source qui couvre TypeORM, MongoDB, CQRS et OpenAPI de façon exhaustive. À garder pour l'étape 3+.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <p><strong>Alternative si tu bloques</strong> : <a href="https://docs.nest-js.fr/" target="_blank" rel="noopener">docs.nest-js.fr</a> est un second miroir français de la documentation officielle, au même format. Et la <a href="https://nestjs.com/documentation" target="_blank" rel="noopener">doc officielle en anglais</a> reste la source la plus à jour pour les versions récentes.</p>
+    </div>
+  </section>
+
+  <!-- ================= PIÈGES ================= -->
+  <section>
+    <div class="sec-head"><span class="num">06</span><h2>Les quatre pièges du débutant</h2></div>
+    <p class="sec-sub">Ce sont les erreurs qui reviennent le plus souvent — et celles qui coûtent le plus de temps.</p>
+    <div class="pit-grid">
+      <div class="pit">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Tout dans un seul module</h4>
+        <p>Un <code>AppModule</code> qui grossit n'est pas de l'architecture. Un module par domaine, dès l'étape 1.</p>
+      </div>
+      <div class="pit">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Logique métier dans le contrôleur</h4>
+        <p>Le contrôleur ne fait que valider, déléguer, répondre. La logique vit dans le service — c'est ce qui rend le code testable.</p>
+      </div>
+      <div class="pit">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Validation oubliée</h4>
+        <p>Sans <code>ValidationPipe</code> global, n'importe quel JSON entre dans ta base. Une ligne dans <code>main.ts</code> règle le problème.</p>
+      </div>
+      <div class="pit">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Sauter Nest et écrire du Express</h4>
+        <p>Si tu écris <code>app.get()</code> dans <code>main.ts</code>, tu n'utilises plus Nest. Les routes passent par les contrôleurs et les modules.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Sources vérifiées</strong> — nestjs.fr (documentation française), docs.nest-js.fr (miroir), nestjs.com (documentation officielle et versions), github.com/nestjs/nest (versions v11 / v12), nestjs.com/documentation/data-integration (ORM).
+    <ul>
+      <li>Version du framework au moment de la rédaction : <strong>Nest v12</strong> (v12.2.0, 19 oct. 2026), ligne v11 toujours maintenue (v11.2.8).</li>
+      <li>Node.js requis : 20.19+ ; <code>@nestjs/typeorm</code> exige désormais Node &gt;= 20.19.0.</li>
+      <li>Les liens YouTube peuvent être déplacés par leur auteur — la playlist reste le point d'entrée fiable.</li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>
